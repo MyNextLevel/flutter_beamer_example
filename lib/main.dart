@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:beamer/beamer.dart';
 
 void main() => runApp(const MyApp());
 
@@ -7,13 +8,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Beamer Example',
-      home: Scaffold(
-        body: Center(
-          child: Text('Beamer Example'),
-        ),
+    return MaterialApp.router(
+      routeInformationParser: BeamerParser(),
+      routerDelegate: BeamerDelegate(
+        initialPath: '/',
+        notFoundRedirectNamed: '/',
+        transitionDelegate: const NoAnimationTransitionDelegate(),
+        locationBuilder: BeamerLocationBuilder(beamLocations: []),
       ),
     );
   }
